@@ -1,0 +1,130 @@
+Correlation between mpg and length and weight
+
+      cor(mecha_car_table$length,mecha_car_table$mpg) #calculate             correlation coefficient
+      [1] 0.6094798
+      > mecha_matrix <- as.matrix(mecha_car_table[,c("mpg","length"          ,"weight")]) #convert data frame into numeric matrix
+      > cor(mecha_matrix)
+                    mpg     length      weight
+      mpg    1.00000000  0.6094798  0.09068314
+      length 0.60947984  1.0000000 -0.12271790
+      weight 0.09068314 -0.1227179  1.00000000
+      
+      Correlation matrix between mpg and length - shows some correlation however, mpg and weight shows no correlation.
+      
+      Plots - between mpg and length shows positive correlation - meaning as the vehicle length increases mpg tends to increase          somewhat as well.
+
+Linear Model
+
+      Coefficients:
+      (Intercept)       length  
+          -25.062        4.673  
+          
+       Multiple R-squared:  0.3715  
+       p-value: 2.632e-06
+       
+       R-squared 0.37 indicates that 37% of all mpg predictions with          vehicle length will be correct using linear model. In addition,        p-value is much smaller than assumed significance level of 0.05%        . Therefore, we reject null hypothesis and that the slope of           linear model is not zero.
+       
+       
+      Visualization in combination with caculated p-value and r-squared       value - there is a positive relationship between length and mpg.
+
+MULTIPLE Linear Regression Model
+
+Coefficients:
+(Intercept)       length       weight        angle    clearance  awd
+ -1.040e+02    6.267e+00    1.245e-03    6.877e-02    3.546e+00  -3.411e+00 
+ Multiple R-squared:  0.7149  
+ p-value: 5.35e-11
+  
+  
+  Coefficients:
+              Estimate Std. Error t value Pr(>|t|)    
+(Intercept) -1.040e+02  1.585e+01  -6.559 5.08e-08 ***
+length       6.267e+00  6.553e-01   9.563 2.60e-12 ***
+weight       1.245e-03  6.890e-04   1.807   0.0776 .  
+angle        6.877e-02  6.653e-02   1.034   0.3069    
+clearance    3.546e+00  5.412e-01   6.551 5.21e-08 ***
+awd         -3.411e+00  2.535e+00  -1.346   0.1852    
+
+
+1) Vehicle length and Vehicle clearance Pr value is very small indicating that they are statistically unlikely to provider randome amounts to the linear model. Or length and clearance have a significant impact on mpg than other variables.
+
+2) There is a positive slope as the p value is much smaller than 0.05%.
+
+3) r squared value increased from 0.37 to 0.71 in multiple linear regression model. Also - since the amount of information obtained and analzed are greater with multiple linear regression model. This model predict that vehicle length and vehicle clearance will have significant impact on mpg.
+
+
+
+SUSPENSION COIL SUMMARY
+
+mean(Suspension_coil_table$PSI) 
+[1] 1499.531
+> median(Suspension_coil_table$PSI)
+[1] 1499.747
+> var(Suspension_coil_table$PSI)
+[1] 76.23459
+> sd(Suspension_coil_table$PSI)
+[1] 8.731242
+
+Manufacturing_Lot  Mean Median   Std    Var
+  <chr>             <dbl>  <dbl> <dbl>  <dbl>
+1 Lot1              1500.  1500.  1.07   1.15
+2 Lot2              1500.  1499.  3.18  10.1 
+3 Lot3              1499.  1498. 14.8  220.  
+
+Lot 3 variance (dispersion of data)is much higher than Lot 1 and Lot2.
+
+
+Suspension COIL T-TEST
+
+> t.test(subset(Suspension_coil_table,Manufacturing_Lot=="Lot1")$PSI,mu = 1500)
+
+	One Sample t-test
+
+data:  subset(Suspension_coil_table, Manufacturing_Lot == "Lot1")$PSI
+t = 0.12028, df = 49, p-value = 0.9048
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1499.714 1500.322
+sample estimates:
+mean of x 
+ 1500.018 
+
+> t.test(subset(Suspension_coil_table,Manufacturing_Lot=="Lot2")$PSI,mu = 1500)
+
+	One Sample t-test
+
+data:  subset(Suspension_coil_table, Manufacturing_Lot == "Lot2")$PSI
+t = -0.95324, df = 49, p-value = 0.3451
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1498.666 1500.476
+sample estimates:
+mean of x 
+ 1499.571 
+
+> t.test(subset(Suspension_coil_table,Manufacturing_Lot=="Lot3")$PSI,mu = 1500)
+
+	One Sample t-test
+
+data:  subset(Suspension_coil_table, Manufacturing_Lot == "Lot3")$PSI
+t = -0.47484, df = 49, p-value = 0.637
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1494.789 1503.219
+sample estimates:
+mean of x 
+ 1499.004 
+ 
+ As per the Sample estimates - Lot 1 and 2 are not different but Lot 3 PSI is different.
+
+
+
+Design your own study
+
+fuel efficiency and horse power  could be interests of consumer since that affects how fast cars can speed up and also the fuel cost.
+
+hypothesis - could be if there is a significance difference between MechaCar fuel efficiency and Horse Power vs other cars.
+
+Need to collect fuel data, horse power data, manufacturer data
+
+
